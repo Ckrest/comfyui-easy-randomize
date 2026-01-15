@@ -1,0 +1,7 @@
+{
+  "name": "comfyui-easy-randomize",
+  "description": "Random selection nodes with freeze/lock capability for iterative prompt building in ComfyUI.",
+  "topics": ["comfyui", "custom-nodes", "random", "prompt-engineering", "workflow"],
+  "private": false,
+  "homepage": ""
+}
