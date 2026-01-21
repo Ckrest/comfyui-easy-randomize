@@ -1,0 +1,38 @@
+# ComfyUI Easy Randomize - Random Selection Nodes
+name: comfyui-easy-randomize
+tier: ai
+status: active
+readiness: ready
+description: Random selection nodes with freeze/lock capability for iterative prompt building in ComfyUI
+
+has:
+  - own-git-repo
+
+repository: https://github.com/Ckrest/comfyui-easy-randomize
+license: MIT
+runtime: python
+
+depends_on:
+  - comfyui
+
+provides:
+  - random-selection
+  - freezable-inputs
+
+tags:
+  - comfyui
+  - custom-nodes
+  - random
+  - prompt
+  - selection
+  - library
+
+usage: |
+  ComfyUI nodes for random selection with freeze capability.
+
+  Install: Symlink to ComfyUI/custom_nodes/
+
+  Features:
+  - Random selection from lists
+  - Freeze/lock selections for iteration
+  - Visual feedback on frozen state
