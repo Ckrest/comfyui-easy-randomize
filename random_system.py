@@ -1,7 +1,6 @@
 """
-ComfyUI Easy Randomize - Random selection with freeze/lock capability.
-
-Workflow: Randomize -> Preview -> Freeze what you like -> Iterate on the rest.
+Advanced Random Selection System for ComfyUI
+Minimal version to debug PrimeVue config error.
 """
 
 import random
@@ -34,7 +33,7 @@ class ItemPool:
     RETURN_TYPES = ("POOL", "STRING")
     RETURN_NAMES = ("pool", "items_list")
     FUNCTION = "create_pool"
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Selection"
 
     def create_pool(self, items, pool_name):
         lines = items.strip().split('\n')
@@ -80,7 +79,7 @@ class RandomSelector:
     RETURN_NAMES = ("selected",)
     FUNCTION = "select"
     OUTPUT_NODE = True
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Selection"
 
     def select(self, count, frozen, allow_duplicates, display, pool=None):
         if pool is None:
@@ -127,7 +126,7 @@ class StringJoiner:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "join"
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Utilities"
 
     def join(self, separator, **kwargs):
         parts = []
@@ -164,7 +163,7 @@ class FreezableInput:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "process"
     OUTPUT_NODE = True
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Utilities"
 
     def process(self, frozen, display, text=None):
         if frozen:
@@ -249,7 +248,7 @@ class FreezableStringCombiner:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "combine"
     OUTPUT_NODE = True
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Utilities"
 
     def combine(self, separator, freeze_all, **kwargs):
         values = []
@@ -296,7 +295,7 @@ class TemplateFiller:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "fill"
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Utilities"
 
     def fill(self, template, **kwargs):
         replacements = {f"slot_{i}": kwargs.get(f"slot_{i}", "") or "" for i in range(1, 4)}
@@ -323,7 +322,7 @@ class SelectionRecorder:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("json_output",)
     FUNCTION = "record"
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Output"
     OUTPUT_NODE = True
 
     def record(self, **kwargs):
@@ -351,7 +350,7 @@ class SaveImageWithSelections(SaveImage):
             },
         }
 
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Output"
 
     def save_images(self, images, filename_prefix="ComfyUI", selection_json=None, prompt=None, extra_pnginfo=None):
         if selection_json:
@@ -420,7 +419,7 @@ class SmartSelector:
     RETURN_NAMES = ("selected", "item_count")
     FUNCTION = "select"
     OUTPUT_NODE = True
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Selection"
 
     def _parse_items(self, text):
         """Parse items from text, filtering out comments and empty lines.
@@ -548,7 +547,7 @@ class PreviewImageWithText(SaveImage):
     RETURN_TYPES = ()
     FUNCTION = "preview_with_text"
     OUTPUT_NODE = True
-    CATEGORY = "Easy Randomize"
+    CATEGORY = "Local Custom/Output"
 
     def preview_with_text(self, images, text_display="", text=None, prompt=None, extra_pnginfo=None):
         # Use connected text input if available, otherwise use widget value
@@ -563,6 +562,39 @@ class PreviewImageWithText(SaveImage):
         return result
 
 
+class WidgetTest:
+    """Test node for experimenting with widget display modes.
+    Testing MARKDOWN widgets as spacers between input groups.
+    """
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "text_1": ("STRING", {"default": "", "multiline": True}),
+                "text_2": ("STRING", {"default": "", "multiline": True}),
+                "text_3": ("STRING", {"default": "", "multiline": True}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING")
+    RETURN_NAMES = ("out_1", "out_2", "out_3")
+    FUNCTION = "main"
+    OUTPUT_NODE = True
+    CATEGORY = "Local Custom/Test"
+
+    def main(self, text_1="", text_2="", text_3=""):
+        # Return UI updates for spacer widgets and the pass-through values
+        return {
+            "ui": {
+                "spacer_1": [text_1],
+                "spacer_2": [text_2],
+                "spacer_3": [text_3],
+            },
+            "result": (text_1, text_2, text_3)
+        }
+
+
 # Node registration
 NODE_CLASS_MAPPINGS = {
     "ItemPool": ItemPool,
@@ -575,6 +607,7 @@ NODE_CLASS_MAPPINGS = {
     "SaveImageWithSelections": SaveImageWithSelections,
     "SmartSelector": SmartSelector,
     "PreviewImageWithText": PreviewImageWithText,
+    "WidgetTest": WidgetTest,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -588,4 +621,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "SaveImageWithSelections": "Save Image (with Selections)",
     "SmartSelector": "Smart Selector 🎯",
     "PreviewImageWithText": "Preview Image + Text 📝",
+    "WidgetTest": "Widget Test 🧪",
 }
