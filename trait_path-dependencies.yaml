@@ -1,0 +1,9 @@
+# comfyui-easy-randomize - path-dependencies trait
+
+paths:
+- path: random_system.py
+  purpose: Random selection nodes
+  type: binary
+- path: js/FreezableInput.js
+  purpose: Freeze/lock UI controls
+  type: file
