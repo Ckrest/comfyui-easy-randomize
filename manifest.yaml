@@ -1,12 +1,10 @@
-# comfyui-easy-randomize
 name: comfyui-easy-randomize
 description: Random selection nodes with freeze/lock capability for iterative prompt
   building in ComfyUI
-state: draft
+state: ready
 traits:
 - comfyui-node
 - published
-- path-dependencies
 - python
 tags:
 - ComfyUI
