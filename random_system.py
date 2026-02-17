@@ -129,6 +129,8 @@ class StringJoiner:
     CATEGORY = "Local Custom/Utilities"
 
     def join(self, separator, **kwargs):
+        # Interpret escape sequences so users can type \n for newline, \t for tab
+        separator = separator.replace("\\n", "\n").replace("\\t", "\t")
         parts = []
         for i in range(1, 6):
             value = kwargs.get(f"string_{i}", "")
@@ -251,6 +253,8 @@ class FreezableStringCombiner:
     CATEGORY = "Local Custom/Utilities"
 
     def combine(self, separator, freeze_all, **kwargs):
+        # Interpret escape sequences so users can type \n for newline, \t for tab
+        separator = separator.replace("\\n", "\n").replace("\\t", "\t")
         values = []
         ui_updates = {}
 
