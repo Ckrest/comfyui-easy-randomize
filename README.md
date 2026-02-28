@@ -14,6 +14,12 @@ Random selection nodes with freeze/lock capability for iterative prompt building
 - **Sequential Mode** - Step through items in order
 - **Save with Metadata** - Embed selection data in saved images
 
+## Screenshots
+
+| Nodes Overview | Freezable String Combiner |
+|:---:|:---:|
+| ![Nodes Overview](screenshots/nodes-overview.png) | ![Freezable String Combiner](screenshots/freezable-string-combiner.png) |
+
 ## Nodes
 
 | Node | Purpose |
