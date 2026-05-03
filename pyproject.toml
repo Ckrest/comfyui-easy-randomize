@@ -1,0 +1,19 @@
+[project]
+name = "comfyui-easy-randomize"
+version = "0.1.0"
+description = "Random selection nodes with freeze/lock capability for iterative prompt building in ComfyUI"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Ckrest"}]
+license = {file = "LICENSE"}
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/Ckrest/comfyui-easy-randomize"
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["random_system"]
